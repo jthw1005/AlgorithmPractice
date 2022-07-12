@@ -1,3 +1,8 @@
+/**
+ * 신고 결과 받기
+ * https://school.programmers.co.kr/learn/courses/30/lessons/92334
+ */
+
 function solution(id_list, report, k) {
   const usrNotifyList = {};
   const uniqueReport = [...new Set(report)];
@@ -5,7 +10,7 @@ function solution(id_list, report, k) {
   const answer = new Array(id_list.length).fill(0);
 
   for (let i = 0; i < reportLength; i++) {
-    const wordsArray = uniqueReport[i].split(" ");
+    const wordsArray = uniqueReport[i].split(' ');
     if (!usrNotifyList.hasOwnProperty(wordsArray[1])) {
       usrNotifyList[wordsArray[1]] = [];
     }
