@@ -4,9 +4,9 @@
  */
 var isValid = function (s) {
   const bracketPairObj = {
-    "(": ")",
-    "{": "}",
-    "[": "]",
+    '(': ')',
+    '{': '}',
+    '[': ']',
   };
 
   const resultStack = [];

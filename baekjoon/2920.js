@@ -1,22 +1,22 @@
-const readline = require("readline");
+const readline = require('readline');
 const rl = readline.createInterface({
   input: process.stdin,
   output: process.stdout,
 });
 
-rl.on("line", function (input) {
-  const arr = input.split(" ");
+rl.on('line', function (input) {
+  const arr = input.split(' ');
 
   let dx = -1;
-  let anwser = "descending";
+  let anwser = 'descending';
   if (Number(arr[0]) === 1) {
     dx = 1;
-    anwser = "ascending";
+    anwser = 'ascending';
   }
 
   for (let i = 0; i < arr.length - 1; i++) {
     if (Number(arr[i + 1]) !== Number(arr[i]) + dx) {
-      console.log("mixed");
+      console.log('mixed');
       rl.close();
       return false;
     }
@@ -26,6 +26,6 @@ rl.on("line", function (input) {
   rl.close();
 });
 
-rl.on("close", function () {
+rl.on('close', function () {
   process.exit();
 });
