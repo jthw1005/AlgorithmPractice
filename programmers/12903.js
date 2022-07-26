@@ -5,15 +5,15 @@
 
 function solution(s) {
   const len = s.length;
-  let startIdx, resultLength;
+  let startIdx, endIdx;
 
   if (len % 2 === 0) {
     startIdx = len / 2 - 1;
-    resultLength = 2;
+    endIdx = startIdx + 2;
   } else {
-    startIdx = len / 2;
-    resultLength = 1;
+    startIdx = Math.floor(len / 2);
+    endIdx = startIdx + 1;
   }
 
-  return (answer = s.substr(startIdx, resultLength));
+  return (answer = s.substring(startIdx, endIdx));
 }
