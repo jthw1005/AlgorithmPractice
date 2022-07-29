@@ -15,3 +15,4 @@
 | 2022.07.28 | Programmers |  12969   |                   | 별찍기      |
 | 2022.07.28 | Programmers |  12954   |                   |             |
 | 2022.07.29 | Programmers |  12944   | Math              | 평균        |
+| 2022.07.29 | Programmers |  12922   |                   |             |
