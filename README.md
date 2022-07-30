@@ -16,3 +16,4 @@
 | 2022.07.28 | Programmers |  12954   |                   |             |
 | 2022.07.29 | Programmers |  12944   | Math              | 평균        |
 | 2022.07.29 | Programmers |  12922   |                   |             |
+| 2022.07.30 | Programmers |  12919   | Math              |             |
