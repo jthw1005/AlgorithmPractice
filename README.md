@@ -18,3 +18,4 @@
 | 2022.07.29 | Programmers |  12922   |                   |             |
 | 2022.07.30 | Programmers |  12912   | Math              |             |
 | 2022.07.30 | Programmers |  12919   |                   |             |
+| 2022.07.31 | Programmers |  68644   |                   |             |
