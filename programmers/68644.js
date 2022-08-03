@@ -15,6 +15,5 @@ function solution(numbers) {
     }
   }
 
-  result.sort((a, b) => a - b);
-  return result;
+  return result.sort((a, b) => a - b);
 }
