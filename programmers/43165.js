@@ -5,21 +5,22 @@
 
 function solution(numbers, target) {
   let answer = 0;
-  let depth = 0;
 
-  const doSome = (sum) => {
-    if (depth === numbers.length && sum === target) {
-      answer++;
+  const doSome = (sum, depth) => {
+    if (depth === numbers.length) {
+      if (sum === target) {
+        answer++;
+      }
       return;
     }
 
-    depth++;
-
-    doSome(sum + numbers[depth - 1]);
-    doSome(sum - numbers[depth - 1]);
+    doSome(sum + numbers[depth], depth + 1);
+    doSome(sum - numbers[depth], depth + 1);
   };
 
-  doSome(0);
+  doSome(0, 0);
 
   return answer;
 }
+
+solution([4, 1, 2, 1]);
