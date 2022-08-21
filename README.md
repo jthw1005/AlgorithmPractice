@@ -39,3 +39,4 @@
 | 2022.08.14 | Programmers |  12931   |                   |             |
 | 2022.08.15 | Programmers |  12901   |                   |             |
 | 2022.08.17 | Programmers |  87389   |                   |             |
+| 2022.08.21 | Programmers |  12917   |                   |             |
