@@ -9,9 +9,7 @@ function solution(n) {
   const end = Math.sqrt(n);
 
   for (let i = 2; i <= end; ++i) {
-    if (arr[i] === false) {
-      continue;
-    }
+    if (arr[i] === false) continue;
 
     for (let k = i * i; k <= n; k += i) {
       arr[k] = false;
@@ -19,9 +17,8 @@ function solution(n) {
   }
 
   for (let i = 2; i <= n; ++i) {
-    if (arr[i] === true) {
-      answer++;
-    }
+    if (arr[i] === true) answer++;
   }
+
   return answer;
 }
