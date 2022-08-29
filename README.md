@@ -47,4 +47,5 @@
 | 2022.08.23 | Programmers |  12915   |                   |             |
 | 2022.08.24 | Programmers |  12926   |                   |             |
 | 2022.08.26 | Programmers |  82612   |                   |             |
+| 2022.08.27 | Programmers |  12921   |                   |             |
 | 2022.08.28 | Programmers |  12977   |                   |             |
