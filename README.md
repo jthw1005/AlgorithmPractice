@@ -52,3 +52,4 @@
 | 2022.08.30 | Programmers |  17682   |                   |             |
 | 2022.09.01 | Programmers |  86491   |                   |             |
 | 2022.09.02 | Programmers |  12982   |                   |             |
+| 2022.09.03 | Programmers |  17681   |                   |             |
