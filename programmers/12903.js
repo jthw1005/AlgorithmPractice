@@ -4,16 +4,5 @@
  */
 
 function solution(s) {
-  const len = s.length;
-  let startIdx, endIdx;
-
-  if (len % 2 === 0) {
-    startIdx = len / 2 - 1;
-    endIdx = startIdx + 2;
-  } else {
-    startIdx = Math.floor(len / 2);
-    endIdx = startIdx + 1;
-  }
-
-  return (answer = s.substring(startIdx, endIdx));
+  return s.length % 2 === 0 ? s[s.length / 2 - 1] + s[s.length / 2] : s[Math.floor(s.length / 2)];
 }
