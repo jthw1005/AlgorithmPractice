@@ -14,8 +14,5 @@ function sameFrequency(a, b) {
     b = Math.floor(b / 10);
   }
 
-  for (let key in obj) {
-    if (obj[key]) false;
-    return true;
-  }
+  return true;
 }
