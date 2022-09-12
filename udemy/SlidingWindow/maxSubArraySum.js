@@ -14,5 +14,3 @@ function maxSubArraySum(array, num) {
 
   return max;
 }
-
-console.log(maxSubArraySum([1, 4, 2, 10, 23, 3, 1, 0, 20], 4));
