@@ -88,7 +88,7 @@ function collectOddValues(arr) {
 
 - Pure Recursion으로 로직을 구현할 때, 원본은 건들이지 않고 새로운 복사본을 만들기 위해 다음과 같은 메서드들이 필요하다.
   1. Array - slice, spread operator, concat
-  2. String - slice, substr, substring
+  2. String - slice, substring
   3. Object - Object.assign, spread operator
 
 ## Personal Tip
