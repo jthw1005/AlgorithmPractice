@@ -10,4 +10,83 @@
 ## Feature
 
 - Non-Recursive한 문제 해결 패턴이 Iterative인 것처럼 Recursive도 문제 해결 패턴 중 하나이다.
--
+- JSON.parse / JSON.stringify, Document.getElementById / DOM traversal algorithm, Object traversal 등등 많은 곳에서 이미 쓰이고 있다.
+- 재귀 함수는 반드시 갖춰야 하는 두 가지 요소가 있다.
+  1. Base case
+  - Base case에 도달할 때까지 같은 함수를 계속해서 호출하기
+  2. Different Input
+  - 함수를 매번 호출할 때마다 다른 인풋 넣어주기
+- 위 두 가지 요소가 올바르게 작성되지 않으면 'stack overflow'가 일어날 수도 있다.
+
+## 호출 스택
+
+- 거의 모든 프로그래밍 언어에는 보이지 않는 곳에서 함수 호출을 관리하는 일종의 데이터 구조가 있다.
+- 그래서 그걸 담당하는 데이터 구조가 있는데, 자바스크립트의 경우에는 '호출 스택'이다.
+- 호출 스택은 자바스크립트의 보이지 않는 곳에서 작동하는 정적 데이터 구조이다.
+- 함수를 호출하면 호출 스택의 꼭대기에 쌓인다.
+- 함수가 종료되면 호출 스택의 꼭대기에서 제거된다.
+- 이전에 실행되던 함수가 종료되면, 컴파일러가 스택의 제일 위에 있는 항목을 제거한다.
+- 재귀 함수를 실행하면 호출 스택을 엄청나게 많이 사용하게 된다.
+
+## Helper Method Recursion
+
+- 재귀를 사용하는 설계 패턴.
+
+- 형태
+
+```js
+function outer(input) {
+  const outerScopedVariable = [];
+
+  function helper(helperInput) {
+    helper(helperInput--);
+  }
+
+  helper(input);
+
+  return outerScopedVariable;
+}
+```
+
+- 팩토리얼 함수와 같은 재귀 함수들은 Line 38 ~ 42과 같은 형태였다.
+- outerScopedVariable이라는 변수를 전역 변수로 만들지 않기 위해서 외부를 함수로 감싼 형태이다.
+- 재귀함수를 실행한 결과를 바깥 함수의 배열 등에 저장하고자 할 때 사용한다.
+
+- 예시
+
+```js
+function collectOddValues(arr) {
+  let result = [];
+
+  function helper(helperInput) {
+    if (helperInput.length === 0) return;
+    if (helperInput[0] % 2 !== 0) result.push(helperInput[0]);
+    helper(helperInput.slice(1));
+  }
+
+  helper(arr);
+
+  return result;
+}
+```
+
+## Pure Recursion
+
+- Helper Method Recursion과는 다르게 로직에 순수하게 재귀만 들어가는 패턴이다.
+
+```js
+function collectOddValues(arr) {
+  let newArr = [];
+
+  if (arr.length === 0) return newArr;
+  if (arr[0] % 2 !== 0) newArr.push(arr[0]);
+  newArr = newArr.concat(collectOddValues(arr.slice(1)));
+
+  return newArr;
+}
+```
+
+- Pure Recursion으로 로직을 구현할 때, 원본은 건들이지 않고 새로운 복사본을 만들기 위해 다음과 같은 메서드들이 필요하다.
+  1. Array - slice, spread operator, concat
+  2. String - slice, substr, substring
+  3. Object - Object.assign, spread operator
