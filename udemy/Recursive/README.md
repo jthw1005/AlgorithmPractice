@@ -90,3 +90,18 @@ function collectOddValues(arr) {
   1. Array - slice, spread operator, concat
   2. String - slice, substr, substring
   3. Object - Object.assign, spread operator
+
+## Personal Tip
+
+재귀함수 작성할 때 점화식을 생각하면 수월해지는 거 같다.
+예를 들어, 피보나치 수열인 경우 아래 점화식을 만족하고
+
+```js
+a(n) = a(n - 1) + a(n - 2)
+```
+
+power 같은 경우 아래 점화식을 만족한다.
+
+```js
+a(n) = b * a(n - 1), a(0) = 1
+```
