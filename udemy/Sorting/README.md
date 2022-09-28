@@ -66,5 +66,3 @@ const swap = (arr, idx1, idx2) => {
 |  Bubble Sort   |         O(N)          |          O(N^2)          |         O(N^2)         |       O(1)       |
 | Insertion Sort |         O(N)          |          O(N^2)          |         O(N^2)         |       O(1)       |
 | Selection Sort |        O(N^2)         |          O(N^2)          |         O(N^2)         |       O(1)       |
-
-## Merge Sort
