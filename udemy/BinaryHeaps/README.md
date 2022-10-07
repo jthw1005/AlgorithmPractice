@@ -43,3 +43,16 @@
 - 제일 마지막 노드를 제거한다.
 - sink down을 적용한다.
 - edge case를 잘 고려할 것.
+
+## Big O
+
+- Insertion: O(logN)
+- Removal: O(logN)
+- Search: O(N)
+  탐색에 대한 최적화에 신경 쓴다면 이진 탐색 트리가 더 좋다.
+
+## Recap
+
+- Binary Heaps은 sorting에 있어 굉장히 유용한 자료 구조이다. 또한, 우선순위 큐와 같이 다른 자료 구조를 만들 때도 유용하다.
+- Max Binary Heaps와 Min Binary Heaps가 있고, 각각 부모가 자식보다 크거나 작다.
+- 수학적 공식을 이용하면, 노드 같은거 없이 배열을 가지고 이진힙을 만들 수 있다.
