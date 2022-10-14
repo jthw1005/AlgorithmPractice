@@ -4,13 +4,7 @@
  */
 
 function solution(A, B) {
-  let answer = 0;
   const newA = A.sort((a, b) => a - b);
   const newB = B.sort((a, b) => b - a);
-
-  newA.forEach((el, idx) => {
-    answer += el * newB[idx];
-  });
-
-  return answer;
+  return newA.reduce((prev, curr, idx) => prev + curr * newB[idx], 0);
 }
