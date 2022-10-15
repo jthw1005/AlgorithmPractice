@@ -23,6 +23,10 @@ function sumZero(array) {
     }
   }
 }
+
+sumZero([-3, -2, -1, 0, 1, 2, 3]); // [-3,3]
+sumZero([-2, 0, 1, 3]); // undefined
+sumZero([1, 2, 3]); // undefined
 ```
 
 ### Solution2 - Multiple Pointers(O(N))
@@ -33,16 +37,11 @@ function sumZero(array) {
   let pointerRight = array.length - 1;
 
   while (pointerLeft < pointerRight) {
-    // sum을 선언해서 넣어주면 한 번만 계산하면 됨.
     let sum = arr[pointerLeft] + arr[pointerRight];
 
-    if (sum < 0) {
-      pointerLeft++;
-    } else if (sum > 0) {
-      pointerRight--;
-    } else {
-      return [array[pointerLeft], array[pointerRight]];
-    }
+    if (sum < 0) pointerLeft++;
+    else if (sum > 0) pointerRight--;
+    else return [array[pointerLeft], array[pointerRight]];
   }
 
   return undefined;
@@ -90,3 +89,7 @@ function countUniqueValues(arr) {
   return i + 1;
 }
 ```
+
+## KeyPoint
+
+대개 정렬된 데이터일 때 사용할 수 있다.

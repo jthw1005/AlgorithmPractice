@@ -17,11 +17,18 @@ function isSubsequence(str1, str2) {
   let leftPointer = 0;
   let rightPointer = 0;
 
-  for (; leftPointer < str1.length; leftPointer++) {
+  while (rightPointer < str2.length || leftPointer < str1.length) {
     if (str1[leftPointer] === str2[rightPointer]) leftPointer++;
     rightPointer++;
   }
 
   if (leftPointer === str1.length) return true;
   return false;
+}
+
+function isSubsequence_recursive(str1, str2) {
+  if (str1.length === 0) return true;
+  if (str2.length === 0) return false;
+  if (str1[0] === str2[0]) return isSubsequence_recursive(str1.substring(1), str2.substring(1));
+  return isSubsequence_recursive(str1, str2.substring(1));
 }
