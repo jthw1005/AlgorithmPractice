@@ -3,3 +3,5 @@ function reverse(string) {
   if (len === 0) return '';
   return string[len - 1] + reverse(string.substring(0, len - 1));
 }
+// reverse('awesome') // 'emosewa'
+// reverse('rithmschool') // 'loohcsmhtir'

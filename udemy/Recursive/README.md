@@ -13,9 +13,9 @@
 - JSON.parse / JSON.stringify, Document.getElementById / DOM traversal algorithm, Object traversal 등등 많은 곳에서 이미 쓰이고 있다.
 - 재귀 함수는 반드시 갖춰야 하는 두 가지 요소가 있다.
   1. Base case
-  - Base case에 도달할 때까지 같은 함수를 계속해서 호출하기
+     Base case에 도달할 때까지 같은 함수를 계속해서 호출하기
   2. Different Input
-  - 함수를 매번 호출할 때마다 다른 인풋 넣어주기
+     함수를 매번 호출할 때마다 다른 인풋 넣어주기
 - 위 두 가지 요소가 올바르게 작성되지 않으면 'stack overflow'가 일어날 수도 있다.
 
 ## 호출 스택
@@ -30,9 +30,11 @@
 
 ## Helper Method Recursion
 
-- 재귀를 사용하는 설계 패턴.
+### Helper Method Recursion이란?
 
-- 형태
+재귀를 사용하는 설계 패턴.
+
+### 패턴 형태
 
 ```js
 function outer(input) {
@@ -48,11 +50,10 @@ function outer(input) {
 }
 ```
 
-- 팩토리얼 함수와 같은 재귀 함수들은 Line 38 ~ 42과 같은 형태였다.
-- outerScopedVariable이라는 변수를 전역 변수로 만들지 않기 위해서 외부를 함수로 감싼 형태이다.
+- outerScopedVariable이라는 변수를 전역 변수로 만들지 않기 위해서 외부를 함수로 감쌓다.
 - 재귀함수를 실행한 결과를 바깥 함수의 배열 등에 저장하고자 할 때 사용한다.
 
-- 예시
+### 예시
 
 ```js
 function collectOddValues(arr) {
@@ -91,9 +92,9 @@ function collectOddValues(arr) {
   2. String - slice, substring
   3. Object - Object.assign, spread operator
 
-## Personal Tip
+## Tip
 
-재귀함수 작성할 때 점화식을 생각하면 수월해지는 거 같다.
+재귀함수 작성할 때 점화식을 생각해보면 수월한 경우가 있다.
 예를 들어, 피보나치 수열인 경우 아래 점화식을 만족하고
 
 ```js

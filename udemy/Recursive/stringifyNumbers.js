@@ -24,4 +24,16 @@ let obj = {
   },
 };
 
-console.log(stringifyNumbers(obj));
+/* OUTPUT
+{
+    num: "1",
+    test: [],
+    data: {
+        val: "4",
+        info: {
+            isRight: true,
+            random: "66"
+        }
+    }
+}
+*/

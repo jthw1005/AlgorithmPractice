@@ -1,12 +1,3 @@
-function nestedEvenSum(obj) {
-  let evenSum = 0;
-  Object.keys(obj).forEach((key) => {
-    if (typeof obj[key] === 'object') evenSum += nestedEvenSum(obj[key]);
-    else if (typeof obj[key] === 'number' && obj[key] % 2 === 0) evenSum += obj[key];
-  });
-  return evenSum;
-}
-
 const obj1 = {
   outer: 2,
   obj: {
@@ -27,4 +18,13 @@ const obj2 = {
   e: { e: { e: 2 }, ee: 'car' },
 };
 
-console.log(nestedEvenSum(obj2));
+function nestedEvenSum(obj) {
+  let evenSum = 0;
+  Object.keys(obj).forEach((key) => {
+    if (typeof obj[key] === 'object') evenSum += nestedEvenSum(obj[key]);
+    else if (typeof obj[key] === 'number' && obj[key] % 2 === 0) evenSum += obj[key];
+  });
+  return evenSum;
+}
+// nestedEvenSum(obj1); // 6
+// nestedEvenSum(obj2); // 10
