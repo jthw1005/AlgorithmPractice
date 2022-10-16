@@ -9,4 +9,4 @@ function naiveString(long, short) {
   return cnt;
 }
 
-console.log(naiveString('this is tiger', 'is'));
+// naiveString('this is tiger', 'is'); // 2
