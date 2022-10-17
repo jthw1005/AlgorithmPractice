@@ -1,8 +1,8 @@
 function quickSort(arr, left = 0, right = arr.length - 1) {
   if (left < right) {
-    const idx = pivot(arr, left, right);
-    quickSort(arr, left, idx - 1);
-    quickSort(arr, idx + 1, right);
+    const pivotIdx = pivot(arr, left, right);
+    quickSort(arr, left, pivotIdx - 1);
+    quickSort(arr, pivotIdx + 1, right);
   }
   return arr;
 }

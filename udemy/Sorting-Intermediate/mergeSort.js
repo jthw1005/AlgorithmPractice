@@ -26,11 +26,11 @@ function merge(arr1, arr2) {
 }
 
 function mergeSort(arr) {
-  if (arr.length <= 1) return arr;
-  const half = Math.floor(arr.length / 2);
-  const left = arr.slice(0, half);
-  const right = arr.slice(half);
-  return merge(mergeSort(left), mergeSort(right));
+  if (arr.length === 1) return arr;
+  const mid = Math.floor(arr.length / 2);
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+  return merge(left, right);
 }
 
 console.log(mergeSort([1, 4, 5, 7, 9, 2, 3, 8]));
