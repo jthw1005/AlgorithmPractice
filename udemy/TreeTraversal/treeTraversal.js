@@ -14,7 +14,6 @@ class BinarySearchTree {
   bfs() {
     const queue = [this.root];
     const data = [];
-
     while (queue.length) {
       const tempNode = queue.shift();
       data.push(tempNode.val);
@@ -23,7 +22,18 @@ class BinarySearchTree {
       if (tempNode.left) queue.push(tempNode.left);
       if (tempNode.right) queue.push(tempNode.right);
     }
+    return data;
+  }
 
+  dfs() {
+    const stack = [this.root];
+    const data = [];
+    while (stack.length) {
+      const tempNode = stack.pop();
+      data.push(tempNode.val);
+      if (tempNode.right) stack.push(tempNode.right);
+      if (tempNode.left) stack.push(tempNode.left);
+    }
     return data;
   }
 
@@ -31,8 +41,6 @@ class BinarySearchTree {
     const data = [];
     const traverse = (node) => {
       data.push(node.val);
-      // 이진 트리라서 if 문이 2개지만, 일반적인 트리인 경우에는
-      // 자식 노드들에 대해 루프를 돌려야 한다.
       if (node.left) return traverse(node.left);
       if (node.right) return traverse(node.right);
     };
@@ -44,8 +52,6 @@ class BinarySearchTree {
   dfsPostOrder() {
     const data = [];
     const traverse = (node) => {
-      // 이진 트리라서 if 문이 2개지만, 일반적인 트리인 경우에는
-      // 자식 노드들에 대해 루프를 돌려야 한다.
       if (node.left) return traverse(node.left);
       if (node.right) return traverse(node.right);
       data.push(node.val);
@@ -58,8 +64,6 @@ class BinarySearchTree {
   dfsInOrder() {
     const data = [];
     const traverse = (node) => {
-      // 이진 트리라서 if 문이 2개지만, 일반적인 트리인 경우에는
-      // 자식 노드들에 대해 루프를 돌려야 한다.
       if (node.left) return traverse(node.left);
       data.push(node.val);
       if (node.right) return traverse(node.right);
