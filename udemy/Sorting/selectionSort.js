@@ -1,12 +1,25 @@
+// my
 function selectionSort(arr) {
-  const newArr = JSON.parse(JSON.stringify(arr));
-
-  for (let i = 0; i < newArr.length - 1; i++) {
-    const idxOfMinVal = newArr.indexOf(Math.min(...newArr.slice(i)));
-    if (idxOfMinVal !== i) swap(newArr, idxOfMinVal, i);
+  for (let i = 0; i < arr.length - 1; i++) {
+    const idxOfMinVal = arr.indexOf(Math.min(...arr.slice(i)));
+    if (idxOfMinVal !== i) swap(arr, idxOfMinVal, i);
   }
 
-  return newArr;
+  return arr;
+}
+
+// colt
+function selectionSort(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    let lowest = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[lowest] > arr[j]) {
+        lowest = j;
+      }
+    }
+    if (i !== lowest) swap(arr, i, lowest);
+  }
+  return arr;
 }
 
 const swap = (arr, idx1, idx2) => {
