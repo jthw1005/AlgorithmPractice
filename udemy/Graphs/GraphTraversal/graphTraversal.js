@@ -44,8 +44,8 @@ class Graph {
   }
 
   dfsIterative(start) {
-    const visitedObj = {};
     const result = [];
+    const visitedObj = {};
     const stack = [start];
     while (stack.length) {
       const currVertex = stack.pop();

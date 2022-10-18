@@ -23,7 +23,6 @@ class Graph {
     this.adjacencyList[vertex].forEach((el) => {
       this.removeEdge(el, vertex);
     });
-
     delete this.adjacencyList[vertex];
   }
 }
