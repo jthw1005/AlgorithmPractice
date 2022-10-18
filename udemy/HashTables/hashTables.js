@@ -16,36 +16,29 @@ class HashTable {
 
   set(key, value) {
     let index = this._hash(key);
-    if (!this.keyMap[index]) {
-      this.keyMap[index] = [];
-    }
+    if (!this.keyMap[index]) this.keyMap[index] = [];
     this.keyMap[index].push([key, value]);
   }
 
   get(key) {
     let index = this._hash(key);
-    if (this.keyMap[index]) {
-      for (let i = 0; i < this.keyMap[index].length; i++) {
-        if (this.keyMap[index][i][0] === key) {
-          return this.keyMap[index][i][1];
-        }
-      }
-    }
-    return undefined;
+    if (!this.keyMap[index]) return undefined;
+    const result = this.keyMap[index].filter((data) => data[0] === key);
+    return result;
   }
 
   keys() {
     const keysArr = [];
-    this.keyMap.forEach((el) => {
-      if (el) el.forEach((el) => keysArr.push(el[0]));
+    this.keyMap.forEach((dataArray) => {
+      if (dataArray) dataArray.forEach((data) => keysArr.push(data[0]));
     });
     return [...new Set(keysArr)];
   }
 
   values() {
     const valuesArr = [];
-    this.keyMap.forEach((el) => {
-      if (el) el.forEach((el) => valuesArr.push(el[1]));
+    this.keyMap.forEach((dataArray) => {
+      if (dataArray) dataArray.forEach((data) => valuesArr.push(data[1]));
     });
     return [...new Set(valuesArr)];
   }

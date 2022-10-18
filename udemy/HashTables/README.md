@@ -32,7 +32,20 @@
 
 - 성능이 빨라야한다.
 - 균일하게 분산시켜야한다.
+  - Hash function은 대부분 prime number를 사용한다.
 - 같은 입력에 대해 같은 출력이 나와야 한다.
+
+## How to handle collisions
+
+1. Separate Chaining
+
+- 인덱스가 겹치는 곳에 배열을 만들어 값을 연속적으로 배치한다.
+- Hash Table의 길이보다 더 많은 데이터를 저장할 수 있다.
+
+2. Linear Probing
+
+- 인덱스가 겹치는 경우 그 다음 인덱스에 값을 저장한다.
+- Hash Table의 길이만큼 데이터를 저장할 수 있다.
 
 ## Big O
 
