@@ -35,6 +35,8 @@
 - 배열의 끝에 추가한다.
 - 올바른 자리를 찾을 때까지 bubble up 시켜준다.
 - 어떤 자식 노드의 부모 노드 인덱스를 찾는 공식은 다음과 같다.
+  - root 노드의 index는 0
+  - childIdx = [parentIdx * 2 + 1, parentIdx * 2 + 2]
   - parentIdx = Math.floor((childIdx - 1) / 2)
 
 ### In case of Removing max value
