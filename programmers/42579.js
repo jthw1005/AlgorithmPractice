@@ -14,6 +14,7 @@ function solution(genres, plays) {
     */
     const genresData = {};
     const sumOfPlays = [];
+    const answer = [];
 
     genres.forEach((genre, idx) => {
         genresData[genre] = genresData[genre] || [];
@@ -26,16 +27,13 @@ function solution(genres, plays) {
         sumOfPlays.push([key, total]);
     }
 
-    sumOfPlays.sort((right, left) => left[1] - right[1]);
+    sumOfPlays
+        .sort((right, left) => left[1] - right[1])
+        .forEach((el) => {
+            answer.push(...genresData[el[0]].slice(0, 2));
+        });
 
-    const result = sumOfPlays
-        .map((el) => {
-            if (genresData[el[0]][1]) return [genresData[el[0]][0][0], genresData[el[0]][1][0]];
-            else return [genresData[el[0]][0][0]];
-        })
-        .flat();
-
-    return result;
+    return answer.map((v) => v[0]);
 }
 
 solution(
