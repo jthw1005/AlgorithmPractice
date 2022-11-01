@@ -5,7 +5,7 @@
 
 function solution(n) {
     let divisors = [];
-    const limit = Math.floor(Math.sqrt(n));
+    const limit = Math.sqrt(n);
 
     for (let i = 1; i <= limit; i++) {
         if (n % i === 0) divisors.push(i);
