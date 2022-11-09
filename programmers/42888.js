@@ -5,14 +5,10 @@
 
 function solution(record) {
   const map = {};
-  const arr = record.map((el) => {
-    return el.split(' ');
-  });
+  const arr = record.map((el) => el.split(' '));
 
   for (let i = 0; i < arr.length; i++) {
-    const logMsg = arr[i][0];
-    const userId = arr[i][1];
-    const nickName = arr[i][2];
+    const [logMsg, userId, nickName] = arr[i];
     if (logMsg === 'Leave') continue;
     map[userId] = nickName;
   }
@@ -20,8 +16,7 @@ function solution(record) {
   return arr
     .filter((el) => el[0] !== 'Change')
     .map((el) => {
-      const logMsg = el[0];
-      const userId = el[1];
+      const [logMsg, userId, _] = el;
       return `${map[userId]}님이 ${logMsg === 'Enter' ? '들어왔' : '나갔'}습니다.`;
     });
 }
