@@ -4,22 +4,16 @@ const [n, m] = require('fs').readFileSync(filePath).toString().trim().split(' ')
 function solution(n, m) {
   const answer = [];
 
-  function innerFunc(index, inputArr, result) {
+  function innerFunc(index, result) {
     if (result.length === m) {
       return answer.push(result);
     }
 
-    inputArr.forEach((el) =>
-      innerFunc(
-        index + 1,
-        inputArr.filter((ell) => ell !== el),
-        result + el
-      )
-    );
+    inputArr.forEach((el) => innerFunc(index + 1, result + el));
   }
 
   const inputArr = Array.from({ length: n }, (_, i) => i + 1);
-  innerFunc(0, inputArr, '');
+  innerFunc(0, '');
 
   return answer.map((v) => v.split('').join(' ')).join('\n');
 }

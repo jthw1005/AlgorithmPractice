@@ -6,7 +6,7 @@ function solution(n, m) {
 
   function innerFunc(index, inputArr, result) {
     if (result.length === m) {
-      answer.push(result);
+      return answer.push(result);
     }
 
     inputArr.forEach((el) =>
