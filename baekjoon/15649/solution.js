@@ -2,26 +2,29 @@ const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 const [n, m] = require('fs').readFileSync(filePath).toString().trim().split(' ').map(Number);
 
 function solution(n, m) {
-  const answer = [];
+  let answer = '';
+  const result = [];
+  const visitedObj = Array.from({ length: n }, () => false);
 
-  function innerFunc(index, inputArr, result) {
-    if (result.length === m) {
-      return answer.push(result);
+  const innerFunc = (index) => {
+    if (index === m) {
+      answer = answer + result.join(' ') + '\n';
+      return;
     }
 
-    inputArr.forEach((el) =>
-      innerFunc(
-        index + 1,
-        inputArr.filter((ell) => ell !== el),
-        result + el
-      )
-    );
-  }
+    for (let i = 1; i <= n; i++) {
+      if (!visitedObj[i - 1]) {
+        visitedObj[i - 1] = true;
+        result.push(i);
+        innerFunc(index + 1);
+        visitedObj[i - 1] = false;
+        result.pop();
+      }
+    }
+  };
 
-  const inputArr = Array.from({ length: n }, (_, i) => i + 1);
-  innerFunc(0, inputArr, '');
-
-  return answer.map((v) => v.split('').join(' ')).join('\n');
+  innerFunc(0);
+  return answer;
 }
 
 console.log(solution(n, m));
