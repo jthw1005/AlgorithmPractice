@@ -1,5 +1,5 @@
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const [[n, m], input] = require('fs')
+const [[n, m], arr] = require('fs')
   .readFileSync(filePath)
   .toString()
   .trim()
@@ -10,6 +10,7 @@ function solution(m) {
   let answer = '';
   const result = [];
   const visitedObj = {};
+  const input = arr.sort((next, prev) => next - prev);
 
   const innerFunc = (index) => {
     if (index === m) {
@@ -17,17 +18,15 @@ function solution(m) {
       return;
     }
 
-    input
-      .sort((next, prev) => next - prev)
-      .forEach((el) => {
-        if (!visitedObj[el]) {
-          visitedObj[el] = true;
-          result.push(el);
-          innerFunc(index + 1);
-          visitedObj[el] = false;
-          result.pop();
-        }
-      });
+    input.forEach((el) => {
+      if (!visitedObj[el]) {
+        visitedObj[el] = true;
+        result.push(el);
+        innerFunc(index + 1);
+        visitedObj[el] = false;
+        result.pop();
+      }
+    });
   };
 
   innerFunc(0);
