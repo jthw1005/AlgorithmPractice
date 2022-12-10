@@ -26,31 +26,3 @@ for (let i = 2; i <= val; i++) {
   }
 }
 console.log(answer.join(' '));
-
-// const input = arr.sort((a, b) => a - b);
-// let answer = [];
-
-// const A = input[0];
-// const B = input[1];
-
-// let gcd = B - A;
-
-// const getGCD = (a, b) => (a % b ? getGCD(b, a % b) : b);
-
-// for (let i = 2; i < N; i++) {
-//   gcd = getGCD(gcd, input[i] - input[i - 1]);
-// }
-// answer.push(gcd);
-
-// for (let i = 2; i * i <= gcd; i++) {
-//   if (!(gcd % i)) {
-//     if (i === gcd / i) answer.push(i);
-//     else {
-//       answer.push(i);
-//       answer.push(gcd / i);
-//     }
-//   }
-// }
-// answer.push(gcd);
-// answer = Array.from(new Set(answer)).sort((a, b) => a - b);
-// console.log(answer.join(' '));
