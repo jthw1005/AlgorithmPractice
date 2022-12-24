@@ -20,7 +20,6 @@ function solution(sudoku) {
     // terminate condition
     if (level === blank.length) {
       console.log(sudoku.map((v) => v.join(' ')).join('\n'));
-      isFinished = true;
       process.exit();
     }
 
@@ -28,13 +27,16 @@ function solution(sudoku) {
     const candidates = new Array(10).fill(true);
     const [row, col] = blank[level];
     for (let i = 0; i < 9; i++) {
+      // 가로선에서 겹치는 숫자 제거
       candidates[sudoku[row][i]] = false;
+      // 세로선에서 겹치는 숫자 제거
       candidates[sudoku[i][col]] = false;
     }
     const leftBoundary = col - (col % 3);
     const upperBoundary = row - (row % 3);
     for (let s = leftBoundary; s < leftBoundary + 3; s++) {
       for (let t = upperBoundary; t < upperBoundary + 3; t++) {
+        // 9개의 블록 내에서 겹치는 숫자 제거
         candidates[sudoku[t][s]] = false;
       }
     }
