@@ -1,44 +1,41 @@
 const filePath = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs')
+const [testCase, ...input] = require('fs')
   .readFileSync(filePath)
   .toString()
   .trim()
   .split('\n');
 
-const solution = (n, m, priorities) => {
-  let newArr = priorities;
-  const num = newArr[m];
-  newArr[m] *= -1;
+const solution = (m, priorities) => {
+  let arr = priorities;
+  const num = arr[m];
+  arr[m] *= -1;
   let cnt = 0;
   while (true) {
-    const max = Math.max(...newArr);
+    const max = Math.max(...arr);
+    const idx = arr.indexOf(max);
     if (max > num) {
-      const maxIdx = newArr.indexOf(max);
-      newArr = newArr.slice(maxIdx + 1).concat(newArr.slice(0, maxIdx));
+      arr = arr.slice(idx + 1).concat(arr.slice(0, idx));
       cnt++;
     } else {
       break;
     }
-    for (let i = 0; i < newArr.length; i++) {
-      if (newArr[i] < 0) {
-        break;
-      } else {
-        cnt++;
-      }
-    }
   }
-  return cnt;
+  let i = 0;
+  while (arr[i] > 0) {
+    if (arr[i] === num) {
+      cnt++;
+    }
+    i++;
+  }
+  return cnt + 1;
 };
 
-const testCase = +input.shift();
 const answer = [];
-
 for (let i = 0; i < testCase; i++) {
   const [n, m] = input.shift().split(' ').map(Number);
   const priorities = input.shift().split(' ').map(Number);
-  const result = solution(n, m, priorities);
+  const result = solution(m, priorities);
   answer.push(result);
 }
 
 console.log(answer.join('\n'));
-// console.log(solution(0, 2, [1, 2, 3, 4]));
