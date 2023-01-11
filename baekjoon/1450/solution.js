@@ -15,13 +15,23 @@ const calSumCombi = (arr, idx, sum, sumArr) => {
 const [weightA, weightB] = [[], []];
 calSumCombi(weightArray.slice(0, Math.floor(n / 2)), 0, 0, weightA);
 calSumCombi(weightArray.slice(Math.floor(n / 2)), 0, 0, weightB);
-weightA.sort((n, p) => n - p);
-weightB.sort((n, p) => n - p);
+weightB.sort((a, b) => a - b);
 
-let answer = 0;
-for (let i = 0, j = weightB.length - 1; i < weightA.length; i++) {
-  while (weightA[i] + weightB[j] > c) j--;
-  answer += j + 1;
-}
+const answer = weightA.reduce((cnt, sum) => {
+  const sumLimit = c - sum;
+  if (sumLimit < 0) return cnt;
+  let lo = 0;
+  let hi = weightB.length - 1;
+  if (weightB[hi] <= sumLimit) return cnt + hi + 1;
+  while (lo + 1 < hi) {
+    const mid = Math.floor((lo + hi) / 2);
+    if (weightB[mid] > sumLimit) {
+      hi = mid;
+    } else {
+      lo = mid;
+    }
+  }
+  return cnt + lo + 1;
+}, 0);
 
 console.log(answer);
