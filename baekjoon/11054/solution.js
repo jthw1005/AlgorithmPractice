@@ -7,6 +7,7 @@ const [n, input] = require('fs')
 
 const arr = input.split(' ').map(Number);
 
+/* 이진탐색을 이용한 풀이 */
 const getLIS = (input) => {
   if (!input.length) {
     return input;
@@ -108,3 +109,35 @@ for (let i = 1; i <= +n; i++) {
 }
 
 console.log(Math.max(...resultArr));
+
+/* DP를 이용한 풀이  */
+const solution = (n, arr) => {
+  const dp1 = new Array(n).fill(1);
+  const dp2 = new Array(n).fill(1);
+
+  for (let i = 0; i < n; i++) {
+    for (let j = 0; j <= i; j++) {
+      // lis
+      if (arr[i] > arr[j] && dp1[i] < dp1[j] + 1) {
+        dp1[i] = dp1[j] + 1;
+      }
+
+      // lds
+      if (
+        arr[n - 1 - i] > arr[n - 1 - i + j] &&
+        dp2[n - 1 - i] < dp2[n - 1 - i + j] + 1
+      ) {
+        dp2[n - 1 - i] = dp2[n - 1 - i + j] + 1;
+      }
+    }
+  }
+
+  let max = 0;
+  for (let i = 0; i < n; i++) {
+    if (max < dp1[i] + dp2[i] - 1) {
+      max = dp1[i] + dp2[i] - 1;
+    }
+  }
+
+  return max;
+};
