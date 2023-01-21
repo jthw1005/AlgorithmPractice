@@ -116,18 +116,18 @@ const solution = (n, arr) => {
   const dp2 = new Array(n).fill(1);
 
   for (let i = 0; i < n; i++) {
-    for (let j = 0; j <= i; j++) {
+    for (let j = 0; j < i; j++) {
       // lis
       if (arr[i] > arr[j] && dp1[i] < dp1[j] + 1) {
         dp1[i] = dp1[j] + 1;
       }
 
-      // lds
+      // lis - reverse
       if (
-        arr[n - 1 - i] > arr[n - 1 - i + j] &&
-        dp2[n - 1 - i] < dp2[n - 1 - i + j] + 1
+        arr[n - 1 - i] > arr[n - 1 - j] &&
+        dp2[n - 1 - i] < dp2[n - 1 - j] + 1
       ) {
-        dp2[n - 1 - i] = dp2[n - 1 - i + j] + 1;
+        dp2[n - 1 - i] = dp2[n - 1 - j] + 1;
       }
     }
   }
@@ -141,3 +141,5 @@ const solution = (n, arr) => {
 
   return max;
 };
+
+console.log(solution(+n, arr));
