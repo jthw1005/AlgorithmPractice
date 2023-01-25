@@ -28,7 +28,8 @@ while (queue.length) {
       curRow + dr >= n ||
       curCol + dc < 0 ||
       curCol + dc >= m ||
-      visited[curRow + dr][curCol + dc]
+      visited[curRow + dr][curCol + dc] ||
+      !graph[curRow + dr][curCol + dc]
     ) {
       return;
     }
