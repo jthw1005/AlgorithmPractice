@@ -50,10 +50,10 @@ for (let i = 0; i < height; i++) {
   }
 }
 
-let days = 0;
+let result = 0;
 while (queue.length) {
   const [curRow, curCol, day] = queue.dequeue();
-  days = Math.max(days, day);
+  result = Math.max(result, day);
   [
     [-1, 0],
     [1, 0],
@@ -77,9 +77,9 @@ while (queue.length) {
 for (let i = 0; i < height; i++) {
   for (let j = 0; j < width; j++) {
     if (!tomatoField[i][j]) {
-      return console.log(-1);
+      result = -1;
     }
   }
 }
 
-console.log(days);
+console.log(result);
