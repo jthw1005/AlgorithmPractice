@@ -6,14 +6,16 @@ const arr = input[1].split(' ').map(Number);
 
 const resultArr = [[arr[0]]];
 
-for (let i = 1; i < arr.length; i++) {
-  const currentNum = arr[i];
+for (let i = 1; i < n; i++) {
+  let maxLen = 0;
+  let maxLenIdx = -1;
   for (let j = i; j >= 0; j--) {
-    if (currentNum > arr[j]) {
-      resultArr[i] = [...resultArr[j], currentNum];
-      break;
+    if (arr[i] > arr[j] && maxLen < resultArr[j].length) {
+      maxLen = resultArr[j].length;
+      maxLenIdx = j;
     }
   }
+  resultArr[i] = maxLenIdx < 0 ? [arr[i]] : [...resultArr[maxLenIdx], arr[i]];
 }
 
 let maxLen = 0;
@@ -26,4 +28,4 @@ for (let i = 0; i < resultArr.length; i++) {
   }
 }
 
-console.log(resultArr[maxLenIdx].join(' '));
+console.log(maxLen + '\n' + resultArr[maxLenIdx].join(' '));
