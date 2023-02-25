@@ -13,11 +13,11 @@ const solution = (input) => {
   }
 
   for (let i = 0; i < 9; i++) {
-    for (let j = i; j < 9; j++) {
+    for (let j = i + 1; j < 9; j++) {
       if (sum - input[i] - input[j] === 100) {
         console.log(
           input
-            .filter((_, idx) => idx === i || idx === j)
+            .filter((_, idx) => idx !== i && idx !== j)
             .sort((n, p) => n - p)
             .join('\n')
         );
