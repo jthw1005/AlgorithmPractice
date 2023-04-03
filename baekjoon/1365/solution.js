@@ -28,12 +28,11 @@ let idx;
 for (let i = 1; i < n; i++) {
   if (data[i] > lastEl) {
     arr.push(data[i]);
-    lastEl = data[i];
   } else if (data[i] < lastEl) {
     idx = calculateIndex(arr, data[i]);
     arr[idx] = data[i];
   }
-  console.log(arr);
+  lastEl = arr[arr.length - 1];
 }
 
 console.log(n - arr.length);
