@@ -12,13 +12,12 @@ const [_, ...input] = require('fs')
 
 const findParent = (parent, x) => {
   if (parent[x] === x) return x;
-  return (parent[x] = findParent(parent, parent[x]));
+  return findParent(parent, parent[x]);
 };
 
 const unionParent = (parent, a, b) => {
   a = findParent(parent, a);
   b = findParent(parent, b);
-
   if (a < b) {
     parent[b] = a;
   } else {
