@@ -21,28 +21,26 @@ class Queue {
 
   enqueue(val) {
     const newNode = new Node(val);
-    if (!this.head) {
+    if (!this.size) {
       this.head = newNode;
-      this.tail = newNode;
     } else {
       this.tail.next = newNode;
-      this.tail = newNode;
     }
+    this.tail = newNode;
     this.size++;
   }
 
   dequeue() {
+    if (!this.size) return null;
     const returnNode = this.head;
-    if (this.size === 0) {
-      return null;
-    } else if (this.size === 1) {
+    if (this.size === 1) {
       this.head = null;
       this.tail = null;
     } else {
-      this.head = returnNode.next;
+      this.head = this.head.next;
     }
     this.size--;
-    return returnNode;
+    return returnNode.val;
   }
 }
 
@@ -53,18 +51,24 @@ const r = (num) => (num % 10) * 1000 + Math.floor(num / 10);
 
 const solution = (start, end) => {
   const queue = new Queue();
+  const visited = Array(10000).fill(false);
+
   queue.enqueue([start, '']);
+  visited[start] = true;
 
   while (queue.size) {
     const [currNum, log] = queue.dequeue();
-    console.log(currNum, log);
     if (currNum === end) return log;
-    queue.enqueue(
-      [d(currNum), log + 'D'],
-      [s(currNum), log + 'S'],
-      [l(currNum), log + 'L'],
-      [r(currNum), log + 'R']
-    );
+
+    const nextNumbers = [d(currNum), s(currNum), l(currNum), r(currNum)];
+    const nextLogs = ['D', 'S', 'L', 'R'];
+
+    for (let i = 0; i < 4; i++) {
+      if (!visited[nextNumbers[i]]) {
+        visited[nextNumbers[i]] = true;
+        queue.enqueue([nextNumbers[i], log + nextLogs[i]]);
+      }
+    }
   }
 };
 
