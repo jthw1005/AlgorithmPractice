@@ -41,8 +41,9 @@ class BinarySearchTree {
     const data = [];
     const traverse = (node) => {
       data.push(node.val);
-      if (node.left) return traverse(node.left);
-      if (node.right) return traverse(node.right);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
+      return;
     };
 
     traverse(this.root);
@@ -52,9 +53,10 @@ class BinarySearchTree {
   dfsPostOrder() {
     const data = [];
     const traverse = (node) => {
-      if (node.left) return traverse(node.left);
-      if (node.right) return traverse(node.right);
+      if (node.left) traverse(node.left);
+      if (node.right) traverse(node.right);
       data.push(node.val);
+      return;
     };
 
     traverse(this.root);
@@ -64,9 +66,10 @@ class BinarySearchTree {
   dfsInOrder() {
     const data = [];
     const traverse = (node) => {
-      if (node.left) return traverse(node.left);
+      if (node.left) traverse(node.left);
       data.push(node.val);
-      if (node.right) return traverse(node.right);
+      if (node.right) traverse(node.right);
+      return;
     };
 
     traverse(this.root);
