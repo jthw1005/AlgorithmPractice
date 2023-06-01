@@ -10,8 +10,6 @@ for (let i = 0; i < T; i++) {
 }
 
 function solution(n, data1, data2) {
-  console.log(data1);
-  console.log(data1.split(' '));
   let sticker = [];
   sticker[0] = data1.split(' ').map((x) => parseInt(x));
   sticker[1] = data2.split(' ').map((x) => parseInt(x));
@@ -30,4 +28,4 @@ function solution(n, data1, data2) {
   return Math.max(dp[0][n - 1], dp[1][n - 1]);
 }
 
-solution(input);
+console.log(answer.join('\n'));
