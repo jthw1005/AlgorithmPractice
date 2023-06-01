@@ -1,42 +1,33 @@
 const fp = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(fp).toString().trim();
+const input = require('fs').readFileSync(fp).toString().trim().split('\n');
 
-function solution(input) {
-  let inputLines = input.split('\n');
-  let T = parseInt(inputLines.shift());
+const T = +input[0];
 
-  for (let i = 0; i < T; i++) {
-    let n = parseInt(inputLines.shift());
-    let sticker = [];
+const answer = [];
 
-    sticker[0] = inputLines
-      .shift()
-      .split(' ')
-      .map((x) => parseInt(x));
-    sticker[1] = inputLines
-      .shift()
-      .split(' ')
-      .map((x) => parseInt(x));
+for (let i = 0; i < T; i++) {
+  answer.push(solution(+input[3 * i + 1], input[3 * i + 2], input[3 * i + 3]));
+}
 
-    let dp = new Array(2);
-    dp[0] = new Array(n);
-    dp[1] = new Array(n);
+function solution(n, data1, data2) {
+  console.log(data1);
+  console.log(data1.split(' '));
+  let sticker = [];
+  sticker[0] = data1.split(' ').map((x) => parseInt(x));
+  sticker[1] = data2.split(' ').map((x) => parseInt(x));
+  const dp = Array.from({ length: 2 }, () => new Array(n));
 
-    dp[0][0] = sticker[0][0];
-    dp[1][0] = sticker[1][0];
+  dp[0][0] = sticker[0][0];
+  dp[1][0] = sticker[1][0];
+  dp[0][1] = dp[1][0] + sticker[0][1];
+  dp[1][1] = dp[0][0] + sticker[1][1];
 
-    for (let j = 1; j < n; j++) {
-      if (j === 1) {
-        dp[0][j] = dp[1][0] + sticker[0][j];
-        dp[1][j] = dp[0][0] + sticker[1][j];
-      } else {
-        dp[0][j] = Math.max(dp[1][j - 1], dp[1][j - 2]) + sticker[0][j];
-        dp[1][j] = Math.max(dp[0][j - 1], dp[0][j - 2]) + sticker[1][j];
-      }
-    }
-
-    console.log(Math.max(dp[0][n - 1], dp[1][n - 1]));
+  for (let j = 2; j < n; j++) {
+    dp[0][j] = Math.max(dp[1][j - 1], dp[1][j - 2]) + sticker[0][j];
+    dp[1][j] = Math.max(dp[0][j - 1], dp[0][j - 2]) + sticker[1][j];
   }
+
+  return Math.max(dp[0][n - 1], dp[1][n - 1]);
 }
 
 solution(input);
