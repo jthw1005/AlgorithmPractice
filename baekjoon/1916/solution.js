@@ -1,37 +1,33 @@
 const fp = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 const input = require('fs').readFileSync(fp).toString().trim().split('\n');
 
-const n = +input.splice(0, 1)[0];
-const m = +input.splice(0, 1)[0];
-const [startPoint, endPoint] = input.splice(-1)[0].split(' ').map(Number);
+const N = parseInt(input[0]);
+const M = parseInt(input[1]);
+const [start, end] = input[M + 2].split(' ').map((e) => parseInt(e));
 
-const visited = Array.from({ length: n + 1 }, () => false);
-const candidateArr = [];
+const graph = Array.from(Array(N + 1), () => []);
 
-const graph = Array.from({ length: n + 1 }, () => ({}));
-for (let data of input) {
-  const [source, destination, cost] = data.split(' ').map(Number);
-  graph[source][`${destination}`] = cost;
+for (let i = 2; i < M + 2; i++) {
+  const [from, to, cost] = input[i].split(' ').map((e) => parseInt(e));
+  graph[from].push([to, cost]);
 }
 
-const recursiveFn = (currPoint, accTime) => {
-  if (currPoint == endPoint) {
-    candidateArr.push(accTime);
-    return;
-  }
-
-  for (let neighbor in graph[currPoint]) {
-    if (visited[neighbor]) {
-      continue;
+function dijkstra(start) {
+  const distances = new Array(N + 1).fill(Infinity);
+  const queue = [[start, 0]];
+  distances[start] = 0;
+  while (queue.length) {
+    const [currentNode, currentCost] = queue.pop();
+    if (distances[currentNode] < currentCost) continue;
+    for (const [nextNode, nextCost] of graph[currentNode]) {
+      const cost = currentCost + nextCost;
+      if (cost < distances[nextNode]) {
+        distances[nextNode] = cost;
+        queue.push([nextNode, cost]);
+      }
     }
-    visited[neighbor] = true;
-    recursiveFn(neighbor, accTime + graph[currPoint][`${neighbor}`]);
-    visited[neighbor] = false;
   }
+  return distances;
+}
 
-  return;
-};
-
-recursiveFn(startPoint, 0);
-
-console.log(Math.min(...candidateArr));
+console.log(dijkstra(start)[end]);
