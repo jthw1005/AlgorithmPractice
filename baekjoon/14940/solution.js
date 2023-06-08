@@ -15,7 +15,7 @@ const queue = [];
 for (let i = 0; i < n; i++) {
   for (let j = 0; j < m; j++) {
     if (input[i][j] === 0) {
-      answer[nR][nC] = 0;
+      answer[i][j] = 0;
     } else if (input[i][j] === 2) {
       answer[i][j] = 0;
       queue.push([i, j]);
