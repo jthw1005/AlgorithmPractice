@@ -1,34 +1,45 @@
 const fp = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(fp).toString().trim().split('\n');
+const input = require('fs')
+  .readFileSync(fp)
+  .toString()
+  .trim()
+  .split('\n')
+  .map((v) => v.split(' ').map(Number));
 
-const [N, M] = input[0].split(' ').map(Number);
-const map = Array.from({ length: N }, () => Array(M).fill(-1));
-const dx = [-1, 1, 0, 0];
-const dy = [0, 0, -1, 1];
+// n: 세로, m: 가로
+const [n, m] = input.shift();
+const answer = Array.from({ length: n }, () => new Array(m).fill(-1));
 const queue = [];
 
-for (let i = 1; i <= N; i++) {
-  const row = input[i].split(' ').map(Number);
-  for (let j = 0; j < M; j++) {
-    if (row[j] === 0) map[i - 1][j] = 0;
-    else if (row[j] === 2) {
-      map[i - 1][j] = 0;
-      queue.push([i - 1, j]);
+// 2의 위치(시작점)를 찾는다.
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < m; j++) {
+    if (input[i][j] === 0) {
+      answer[nR][nC] = 0;
+    } else if (input[i][j] === 2) {
+      answer[i][j] = 0;
+      queue.push([i, j]);
     }
   }
 }
 
-while (queue.length > 0) {
-  const [x, y] = queue.shift();
+// 시작점을 기준으로 상하좌우로 이동한다.
+const dr = [-1, 0, 1, 0];
+const dc = [0, -1, 0, 1];
+
+while (queue.length) {
+  const [cR, cC] = queue.shift();
   for (let i = 0; i < 4; i++) {
-    const nx = x + dx[i];
-    const ny = y + dy[i];
-    if (nx < 0 || nx >= N || ny < 0 || ny >= M) continue;
-    if (map[nx][ny] === -1) {
-      map[nx][ny] = map[x][y] + 1;
-      queue.push([nx, ny]);
+    const [nR, nC] = [cR + dr[i], cC + dc[i]];
+    if (nR < 0 || nC < 0 || nR >= n || nC >= m) {
+      continue;
+    }
+    // 이전 값 + 1을 표시한다.
+    if (answer[nR][nC] === -1) {
+      answer[nR][nC] = answer[cR][cC] + 1;
+      queue.push([nR, nC]);
     }
   }
 }
 
-map.forEach((row) => console.log(row.join(' ')));
+console.log(answer.map((v) => v.join(' ')).join('\n'));
