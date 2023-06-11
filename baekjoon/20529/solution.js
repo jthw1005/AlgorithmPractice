@@ -1,56 +1,66 @@
 const fp = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 const input = require('fs').readFileSync(fp).toString().trim().split('\n');
-const T = +input[0];
 
-const getDistance = (str1, str2) => {
-  let cnt = 0;
-  for (let i = 0; i < 4; i++) {
-    if (str1[i] !== str2[i]) {
-      cnt++;
-    }
+const T = Number(input[0]);
+let index = 1;
+
+for (let i = 0; i < T; i++) {
+  const N = Number(input[index++]);
+  const people = input[index++].split(' ');
+  const mbti = Array(16).fill(0);
+  const types = [
+    'INTJ',
+    'INTP',
+    'INFJ',
+    'INFP',
+    'ISTJ',
+    'ISTP',
+    'ISFJ',
+    'ISFP',
+    'ENTJ',
+    'ENTP',
+    'ENFJ',
+    'ENFP',
+    'ESTJ',
+    'ESTP',
+    'ESFJ',
+    'ESFP',
+  ];
+  let min = Infinity;
+
+  for (let j = 0; j < N; j++) {
+    mbti[types.indexOf(people[j])]++;
   }
-  return cnt;
-};
 
-const solution = (n, data) => {
-  const distances = Array.from({ length: n }, () =>
-    Array.from({ length: n }, () => -1)
-  );
-  const result = [];
-
-  for (i = 0; i < n - 2; i++) {
-    for (j = i + 1; j < n - 1; j++) {
-      for (k = j + 1; k < n; k++) {
-        if (distances[i][j] < 0) {
-          const tempDist = getDistance(data[i], data[j]);
-          distances[i][j] = tempDist;
-          distances[j][i] = tempDist;
+  for (let j = 0; j < 16; j++) {
+    if (mbti[j] >= 3) {
+      min = 0;
+      break;
+    }
+    for (let k = j + 1; k < 16; k++) {
+      if (mbti[k] >= 2) {
+        min = Math.min(min, getDistance(types[j], types[k]) * 2);
+      } else if (mbti[k] >= 1) {
+        for (let l = k + 1; l < 16; l++) {
+          if (mbti[l] >= 1) {
+            min = Math.min(
+              min,
+              getDistance(types[j], types[k]) +
+                getDistance(types[j], types[l]) +
+                getDistance(types[k], types[l])
+            );
+          }
         }
-        if (distances[i][k] < 0) {
-          const tempDist = getDistance(data[i], data[k]);
-          distances[i][k] = tempDist;
-          distances[k][i] = tempDist;
-        }
-        if (distances[j][k] < 0) {
-          const tempDist = getDistance(data[j], data[k]);
-          distances[j][k] = tempDist;
-          distances[k][j] = tempDist;
-        }
-        result.push(distances[i][j] + distances[i][k] + distances[j][k]);
       }
     }
   }
-
-  return Math.min(...result);
-};
-
-const answer = [];
-
-for (let i = 0; i < T; i++) {
-  const n = input[i * 2 + 1];
-  const data = input[i * 2 + 2].split(' ');
-  const result = solution(n, data);
-  answer.push(result);
+  console.log(min);
 }
 
-console.log(answer.join('\n'));
+function getDistance(a, b) {
+  let dist = 0;
+  for (let i = 0; i < 4; i++) {
+    if (a[i] !== b[i]) dist++;
+  }
+  return dist;
+}
