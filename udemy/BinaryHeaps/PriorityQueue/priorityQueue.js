@@ -1,7 +1,7 @@
 class Node {
   constructor(val, priority) {
     this.val = val;
-    this.pritority = priority;
+    this.priority = priority;
   }
 }
 
@@ -20,7 +20,8 @@ class PriorityQueue {
     let childIdx = this.values.length - 1;
     while (childIdx > 0) {
       const parentIdx = Math.floor((childIdx - 1) / 2);
-      if (this.values[childIdx].priority >= this.values[parentIdx].priority) break;
+      if (this.values[childIdx].priority >= this.values[parentIdx].priority)
+        break;
       swap(this.values, childIdx, parentIdx);
       childIdx = parentIdx;
     }
@@ -45,11 +46,13 @@ class PriorityQueue {
       else if (childIdxs[0] === lastIdx) targetIdx = childIdxs[0];
       else
         targetIdx =
-          this.values[childIdxs[0]].priority < this.values[childIdxs[1].priority]
+          this.values[childIdxs[0]].priority <
+          this.values[childIdxs[1]].priority
             ? childIdxs[0]
             : childIdxs[1];
 
-      if (this.values[parentIdx].priority <= this.values[targetIdx].priority) break;
+      if (this.values[parentIdx].priority <= this.values[targetIdx].priority)
+        break;
       swap(this.values, parentIdx, targetIdx);
       parentIdx = targetIdx;
     }
