@@ -1,15 +1,18 @@
 const fp = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
 const input = require('fs').readFileSync(fp).toString().trim().split('\n');
+
 const n = +input[0];
 const tree = Array.from(Array(n + 1), () => []);
-let visit = Array(n + 1).fill(false);
-let distance = Array(n + 1).fill(0);
-
 for (let i = 1; i < n; i++) {
   const [node1, node2, dist] = input[i].split(' ').map((v) => +v);
   tree[node1].push({ to: node2, dist: dist });
   tree[node2].push({ to: node1, dist: dist });
 }
+
+console.log(tree);
+
+let visit = Array(n + 1).fill(false);
+let distance = Array(n + 1).fill(0);
 
 function dfs(start) {
   visit[start] = true;
