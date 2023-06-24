@@ -24,11 +24,13 @@ const stack = [1];
 while (stack.length) {
   const curVertex = stack.pop();
   virus[curVertex] = true;
-  vertices[curVertex].forEach((vertex) => {
-    if (!virus[vertex]) {
-      stack.push(vertex);
-    }
-  });
+  if (vertices[curVertex]) {
+    vertices[curVertex].forEach((vertex) => {
+      if (!virus[vertex]) {
+        stack.push(vertex);
+      }
+    });
+  }
 }
 
 console.log(Object.keys(virus).length - 1);
