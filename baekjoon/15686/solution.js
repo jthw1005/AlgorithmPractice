@@ -1,57 +1,59 @@
 const fp = process.platform === 'linux' ? '/dev/stdin' : './input.txt';
-const input = require('fs').readFileSync(fp).toString().trim().split('\n');
-const [N, M] = input[0].split(' ').map(Number);
-const city = input.slice(1, N + 1).map((line) => line.split(' ').map(Number));
+const [[n, m], ...data] = require('fs')
+  .readFileSync(fp)
+  .toString()
+  .trim()
+  .split('\n')
+  .map((v) => v.split(' ').map(Number));
 
-let home = [];
-let chicken = [];
-
-for (let i = 0; i < N; i++) {
-  for (let j = 0; j < N; j++) {
-    if (city[i][j] === 1) {
+// 1. 순회를 하며 치킨집과 일반집 위치를 파악한다.
+const home = [];
+const chicken = [];
+for (let i = 0; i < n; i++) {
+  for (let j = 0; j < n; j++) {
+    if (data[i][j] === 1) {
       home.push([i, j]);
     }
-    if (city[i][j] === 2) {
+    if (data[i][j] === 2) {
       chicken.push([i, j]);
     }
   }
 }
+// console.log(home, chicken);
 
-const getChickenDistance = (chickens) => {
-  let result = 0;
-
-  home.forEach((h) => {
-    let min = Number.MAX_SAFE_INTEGER;
-    chickens.forEach((c) => {
-      let distance = Math.abs(h[0] - c[0]) + Math.abs(h[1] - c[1]);
-      min = Math.min(min, distance);
+// 2. chicken 배열에서 조합을 이용하여 m개의 인덱스를 뽑는다.
+const combination = (array, number) => {
+  const newArr = [...array];
+  if (number === 1) return newArr.map((el) => [el]);
+  const resultArray = [];
+  while (newArr.length >= number) {
+    const temp = newArr.shift();
+    const tempArr = combination(newArr, number - 1);
+    tempArr.forEach((el, idx) => {
+      tempArr[idx].unshift(temp);
+      resultArray.push(el);
     });
-    result += min;
-  });
-
-  return result;
+  }
+  return resultArray;
 };
+const chickenCandidate = combination(chicken, m);
+// console.log(chickenCandidate);
 
-const combination = (arr, num) => {
-  let result = [];
-  if (num === 1) return arr.map((v) => [v]);
-
-  arr.forEach((v, idx, arr) => {
-    const fixer = v;
-    const restArr = arr.slice(idx + 1);
-    const combinationArr = combination(restArr, num - 1);
-    const combineFix = combinationArr.map((v) => [fixer, ...v]);
-    result.push(...combineFix);
-  });
-
-  return result;
-};
-
-const chickenCombination = combination(chicken, M);
-let result = Number.MAX_SAFE_INTEGER;
-
-chickenCombination.forEach((v) => {
-  result = Math.min(result, getChickenDistance(v));
-});
-
-console.log(result);
+// 3. 일반집에서부터 선택된 치킨집까지의 거리 중 최단 거리를 합하여 결과를 낸다.
+const answerCandidate = [];
+for (let i = 0; i < chickenCandidate.length; i++) {
+  let result = 0;
+  for (let j = 0; j < home.length; j++) {
+    let minDist = Infinity;
+    for (let k = 0; k < m; k++) {
+      minDist = Math.min(
+        minDist,
+        Math.abs(home[j][0] - chickenCandidate[i][k][0]) +
+          Math.abs(home[j][1] - chickenCandidate[i][k][1])
+      );
+    }
+    result = result + minDist;
+  }
+  answerCandidate.push(result);
+}
+console.log(Math.min(...answerCandidate));
