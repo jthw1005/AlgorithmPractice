@@ -7,55 +7,35 @@ const solution = (n, m, w, graphData, wormholeData) => {
     const graph = Array.from({ length: n + 1 }, () => []);
 
     for (let i = 0; i < m; i++) {
-        const [start, end, cost] = graphData[i].split(' ').map(Number);
-        graph[start].push([end, cost]);
-        graph[end].push([start, cost]);
+        const [start, end, dist] = graphData[i].split(' ').map(Number);
+        graph[start].push({ to: end, dist });
+        graph[end].push({ to: start, dist });
     }
 
     for (let i = 0; i < w; i++) {
-        const [start, end, cost] = wormholeData[i].split(' ').map(Number);
-        graph[start].push([end, -cost]);
+        const [start, end, dist] = wormholeData[i].split(' ').map(Number);
+        graph[start].push({ to: end, dist: -dist });
     }
 
-    const bellmanFord = start => {
-        const dist = Array.from({ length: n + 1 }, () => Infinity);
-        dist[start] = 0;
+    const distance = Array.from({ length: n + 1 }, () => n * 10000);
+    distance[1] = 0;
 
-        let isChanged = false;
+    let isUpdated;
 
-        for (let i = 1; i < n; i++) {
-            for (let j = 1; j <= n; j++) {
-                for (const [neighbor, weight] of graph[j]) {
-                    const newDist = dist[j] + weight;
-                    if (newDist < dist[neighbor]) {
-                        dist[neighbor] = newDist;
-                        isChanged = true;
-                    }
-                }
-            }
-            if (isChanged) {
-                isChanged = false;
-            } else {
-                return false;
-            }
-        }
-
-        for (let i = 1; i <= n; i++) {
-            for (const [neighbor, weight] of graph[i]) {
-                const newDist = dist[i] + weight;
-                if (newDist < dist[neighbor]) {
-                    return true;
+    for (let i = 0; i <= n; i++) {
+        isUpdated = false;
+        for (let j = 1; j <= n; j++) {
+            for (const { to, dist } of graph[j]) {
+                const newDist = distance[j] + dist;
+                if (newDist < distance[to]) {
+                    if (i === n) return 'YES';
+                    distance[to] = newDist;
+                    isUpdated = true;
                 }
             }
         }
-
-        return false;
-    };
-
-    for (let i = 1; i <= n; i++) {
-        if (bellmanFord(i)) return 'YES';
+        if (!isUpdated) return 'NO';
     }
-    return 'NO';
 };
 
 const answer = [];
