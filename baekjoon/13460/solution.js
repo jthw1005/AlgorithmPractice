@@ -33,8 +33,6 @@ while (queue.length > 0) {
     graph[curRedRow][curRedCol] = 'R';
     graph[curBlueRow][curBlueCol] = 'B';
 
-    // console.table(graph);
-
     // check up, right, left, down for Red
     for (let i = 0; i < 4; i++) {
         if ((prevI + 2) % 4 === i) {
