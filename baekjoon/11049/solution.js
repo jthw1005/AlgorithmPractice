@@ -12,13 +12,9 @@ const dp = Array.from({ length: n }, () => Array(n).fill(0));
 for (let l = 2; l <= n; l++) {
     for (let i = 0; i <= n - l; i++) {
         const j = i + l - 1;
-        dp[i][j] = Number.MAX_SAFE_INTEGER;
-
+        dp[i][j] = Infinity;
         for (let k = i; k < j; k++) {
-            const cost = dp[i][k] + dp[k + 1][j] + matrix[i][0] * matrix[k][1] * matrix[j][1];
-            if (cost < dp[i][j]) {
-                dp[i][j] = cost;
-            }
+            dp[i][j] = Math.min(dp[i][j], dp[i][k] + dp[k + 1][j] + matrix[i][0] * matrix[k][1] * matrix[j][1]);
         }
     }
 }
