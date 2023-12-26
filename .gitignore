@@ -1,2 +1,5 @@
 test.js
 baekjoon/default
+
+# cpp debug symbol
+*.dsYM
