@@ -1,7 +1,7 @@
 test.js
 barkingdog
 codeforce
-.vscode
+.vscode/
 
 # cpp debug symbol
 *.dsYM
