@@ -1,5 +1,8 @@
 test.js
-baekjoon/default
+barkingdog
+codeforce
+.vscode
 
 # cpp debug symbol
 *.dsYM
+.DS_Store
